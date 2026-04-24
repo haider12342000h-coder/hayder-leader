@@ -4,7 +4,7 @@ function SettingsCards({ settings, isEditing, onFieldChange }) {
       {settings.map((setting) => (
         <article
           key={setting.id}
-          className="rounded-[28px] border border-white/80 bg-white/95 p-5 shadow-soft"
+          className="rounded-[28px] border border-white/80 bg-white/95 p-5 shadow-soft transition hover:-translate-y-1 hover:shadow-xl"
         >
           <div className="flex items-center justify-between gap-3">
             <div>
@@ -22,7 +22,7 @@ function SettingsCards({ settings, isEditing, onFieldChange }) {
                 type="text"
                 value={setting.value}
                 onChange={(event) => onFieldChange(setting.id, event.target.value)}
-                className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-900 outline-none focus:border-brand-400"
+                className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-900 outline-none transition focus:border-brand-400 focus:ring-4 focus:ring-brand-100"
               />
             ) : (
               <div className="rounded-2xl bg-medical-soft/60 px-4 py-3 text-sm font-semibold text-slate-900">

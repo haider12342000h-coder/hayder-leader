@@ -4,7 +4,7 @@ function ConsultationsTabContent({ consultations }) {
   return (
     <div className="space-y-5">
       <section className="rounded-[30px] border border-white/80 bg-white/95 p-6 shadow-soft backdrop-blur-xl">
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h3 className="text-lg font-bold text-slate-950">سجل الاستشارات</h3>
             <p className="mt-2 text-sm leading-7 text-medical-muted">
@@ -23,11 +23,10 @@ function ConsultationsTabContent({ consultations }) {
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-600 text-[10px] font-bold text-white">
                   {index + 1}
                 </span>
-                {index !== consultations.length - 1 ? (
-                  <span className="mt-2 h-full w-px bg-brand-100" />
-                ) : null}
+                {index !== consultations.length - 1 ? <span className="mt-2 h-full w-px bg-brand-100" /> : null}
               </div>
-              <article className="rounded-[24px] border border-medical-border bg-medical-soft/50 p-4">
+
+              <article className="rounded-[24px] border border-medical-border bg-gradient-to-br from-medical-soft/70 to-white p-4 transition hover:shadow-soft">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <h4 className="text-sm font-bold text-slate-950">{consultation.title}</h4>
                   <span className="text-xs text-medical-muted">{consultation.date}</span>
@@ -42,7 +41,7 @@ function ConsultationsTabContent({ consultations }) {
 
       <EmptyState
         title="لا توجد ملفات مرفقة حديثًا"
-        description="يمكنك رفع تحاليل أو صور طبية داخل الاستشارات القادمة لتظهر هنا بشكل منظم ويسهل الرجوع إليه لاحقًا."
+        description="يمكنك رفع تحاليل أو صور طبية داخل الاستشارات القادمة لتظهر هنا بشكل منظم ويسهل الرجوع إليها لاحقًا."
         actionLabel="إضافة ملف جديد"
       />
     </div>

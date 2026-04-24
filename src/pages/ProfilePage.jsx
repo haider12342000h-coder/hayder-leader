@@ -60,31 +60,63 @@ function ProfilePage() {
     };
   }, [activeTab, formState]);
 
+  const activeTabData = useMemo(
+    () => profileTabs.find((tab) => tab.id === activeTab) ?? profileTabs[0],
+    [activeTab],
+  );
+
   if (isLoading) {
     return <LoadingSkeleton />;
   }
 
   return (
     <div className="space-y-6">
-      <section className="rounded-[34px] border border-white/80 bg-white/95 p-6 shadow-soft backdrop-blur-xl sm:p-8">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <section className="profile-glow overflow-hidden rounded-[36px] border border-white/80 bg-white/95 p-6 shadow-soft backdrop-blur-xl sm:p-8">
+        <div className="grid gap-8 xl:grid-cols-[minmax(0,1.25fr)_320px] xl:items-end">
           <div>
-            <span className="inline-flex rounded-full bg-brand-50 px-4 py-2 text-xs font-semibold text-brand-700">
+            <span className="inline-flex rounded-full border border-brand-100 bg-white/80 px-4 py-2 text-xs font-semibold text-brand-700">
               الملف الشخصي
             </span>
-            <h1 className="mt-4 text-3xl font-bold leading-tight text-slate-950 sm:text-4xl">
-              تخطيط أوضح وأسهل للملف الطبي
+            <h1 className="mt-4 max-w-3xl text-3xl font-bold leading-tight text-slate-950 sm:text-4xl">
+              تجربة أكثر وضوحًا لإدارة بياناتك الطبية ومتابعتها بسرعة
             </h1>
             <p className="mt-4 max-w-3xl text-sm leading-8 text-medical-muted sm:text-base">
-              تمت إعادة ترتيب الصفحة لتكون أكثر هدوءًا واتزانًا: معلومات مهمة أولًا، عمود جانبي
-              ثابت للتنبيهات، ومنطقة رئيسية مخصصة للتبويب الحالي فقط.
+              أعدنا تنظيم الملف ليبدأ بالمعلومات الأهم، يحتفظ بالتنبيهات الحساسة بشكل ثابت، ويعرض كل تبويب بطريقة
+              أهدأ وأسهل في القراءة.
             </p>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <div className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-800">
+                اكتمال الملف {profileHeaderData.completion}
+              </div>
+              <div className="rounded-full border border-brand-100 bg-brand-50 px-4 py-2 text-sm font-semibold text-brand-800">
+                {activeTabData.accent}
+              </div>
+              <div className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700">
+                {isEditing ? 'وضع التحرير نشط' : 'وضع العرض'}
+              </div>
+            </div>
           </div>
 
-          <div className="rounded-[24px] border border-brand-100 bg-brand-50/70 px-5 py-4 text-sm leading-7 text-brand-800">
-            قراءة أسهل للمستخدم العربي
-            <br />
-            تركيز أعلى على الثقة والوضوح
+          <div className="rounded-[28px] border border-slate-200/80 bg-slate-50/80 p-5 backdrop-blur">
+            <p className="text-sm font-semibold text-slate-900">نظرة سريعة</p>
+            <div className="mt-4 grid gap-3">
+              <div className="rounded-2xl bg-white px-4 py-3">
+                <p className="text-xs font-semibold text-medical-muted">التبويب الحالي</p>
+                <p className="mt-1 text-base font-bold text-slate-950">{activeTabData.label}</p>
+                <p className="mt-2 text-sm leading-7 text-medical-muted">{activeTabData.description}</p>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
+                <div className="rounded-2xl border border-white bg-white/80 px-4 py-3">
+                  <p className="text-xs font-semibold text-medical-muted">آخر تحديث</p>
+                  <p className="mt-1 text-sm font-bold text-slate-900">{profileHeaderData.responseTime}</p>
+                </div>
+                <div className="rounded-2xl border border-white bg-white/80 px-4 py-3">
+                  <p className="text-xs font-semibold text-medical-muted">العضوية</p>
+                  <p className="mt-1 text-sm font-bold text-slate-900">{profileHeaderData.memberSince}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -97,13 +129,10 @@ function ProfilePage() {
 
       <ProfileSummaryStrip items={profileSummaryItems} />
 
-      <div className="grid gap-6 xl:grid-cols-[320px_minmax(0,1fr)]">
+      <div className="grid gap-6 xl:grid-cols-[340px_minmax(0,1fr)]">
         <ProfileSidebarCard
           healthSummary={profileHealthSummary}
-          alerts={[
-            'حساسية دوائية مؤكدة: البنسلين',
-            'يلزم متابعة ضغط الدم كل 3 أيام',
-          ]}
+          alerts={['حساسية دوائية مؤكدة: البنسلين', 'يلزم متابعة ضغط الدم كل 3 أيام']}
         />
 
         <div className="min-w-0 space-y-6">
@@ -161,9 +190,7 @@ function ProfilePage() {
               settings={settings}
               isEditing={isEditing}
               onFieldChange={(id, value) =>
-                setSettings((current) =>
-                  current.map((item) => (item.id === id ? { ...item, value } : item)),
-                )
+                setSettings((current) => current.map((item) => (item.id === id ? { ...item, value } : item)))
               }
             />
           ) : null}

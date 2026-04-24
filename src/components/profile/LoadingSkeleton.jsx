@@ -7,15 +7,17 @@ function LoadingSkeleton() {
           <div className="mt-4 h-12 w-3/4 rounded-full bg-slate-100" />
           <div className="mt-4 h-4 w-full rounded-full bg-slate-100" />
           <div className="mt-2 h-4 w-2/3 rounded-full bg-slate-100" />
+          <div className="mt-6 grid gap-3 md:grid-cols-3">
+            {Array.from({ length: 3 }).map((_, index) => (
+              <div key={index} className="h-12 rounded-2xl bg-slate-100" />
+            ))}
+          </div>
         </div>
       </section>
 
       <section className="grid gap-4 md:grid-cols-4">
         {Array.from({ length: 4 }).map((_, index) => (
-          <div
-            key={index}
-            className="rounded-[28px] border border-white/80 bg-white/95 p-5 shadow-soft"
-          >
+          <div key={index} className="rounded-[28px] border border-white/80 bg-white/95 p-5 shadow-soft">
             <div className="animate-pulse">
               <div className="h-4 w-24 rounded-full bg-slate-200" />
               <div className="mt-4 h-8 w-20 rounded-full bg-slate-100" />

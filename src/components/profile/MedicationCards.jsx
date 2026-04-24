@@ -4,7 +4,7 @@ function MedicationCards({ medications, isEditing, onFieldChange }) {
       {medications.map((medication) => (
         <article
           key={medication.id}
-          className="rounded-[28px] border border-white/80 bg-white/95 p-5 shadow-soft"
+          className="rounded-[28px] border border-white/80 bg-white/95 p-5 shadow-soft transition hover:-translate-y-1 hover:shadow-xl"
         >
           <div className="flex items-start justify-between gap-4">
             <div>
@@ -24,7 +24,7 @@ function MedicationCards({ medications, isEditing, onFieldChange }) {
             ].map(([label, value, field]) => (
               <label
                 key={field}
-                className="flex items-center justify-between rounded-2xl bg-medical-soft/60 px-4 py-3"
+                className="flex flex-col gap-2 rounded-2xl bg-medical-soft/60 px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
               >
                 <span className="text-sm text-medical-muted">{label}</span>
                 {isEditing ? (
@@ -32,7 +32,7 @@ function MedicationCards({ medications, isEditing, onFieldChange }) {
                     type="text"
                     value={value}
                     onChange={(event) => onFieldChange(medication.id, field, event.target.value)}
-                    className="w-52 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-900 outline-none focus:border-brand-400"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-900 outline-none transition focus:border-brand-400 focus:ring-4 focus:ring-brand-100 sm:w-52"
                   />
                 ) : (
                   <span className="text-sm font-semibold text-slate-900">{value}</span>

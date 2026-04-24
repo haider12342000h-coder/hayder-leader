@@ -19,7 +19,7 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-family: Tahoma, 'Segoe UI', sans-serif;
   background:
     radial-gradient(circle at top right, rgba(32, 108, 255, 0.14), transparent 18%),
     radial-gradient(circle at bottom left, rgba(14, 165, 233, 0.1), transparent 20%),
@@ -64,4 +64,19 @@ select {
 
 .page-enter {
   animation: pageEnter 220ms ease-out;
+}
+
+.profile-glow {
+  position: relative;
+}
+
+.profile-glow::before {
+  content: '';
+  position: absolute;
+  inset: -20% auto auto -10%;
+  width: 260px;
+  height: 260px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(29, 117, 245, 0.16) 0%, rgba(29, 117, 245, 0) 70%);
+  pointer-events: none;
 }
